@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import VideoList from './components/Videos/VideoList';
 import VideoForm from './components/Videos/VideoForm';
+import 'bootswatch/dist/pulse/bootstrap.min.css' 
+import './index.css';
+import Navbar from './components/Navbar/Navbar';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 //Route - create urls
 //Switch[Routes]  - create multiple routes
 const root = ReactDOM.createRoot(
@@ -13,10 +18,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <Navbar/>
+    <div className="container p-4">
       <Routes>
         <Route path="/" element={<VideoList/>}/>
         <Route path="/new-video" element={<VideoForm/>}/>
       </Routes>
+      <ToastContainer/>
+    </div>
     </BrowserRouter>
   </React.StrictMode>
 );
