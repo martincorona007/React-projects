@@ -3,24 +3,34 @@ import {Video} from './IVideo'
 import VideoItem from './VideoItem'
 import * as videoService from './VideoService'
 
+
 const VideoList = () => {
   
-//save videos in this component
-  const [videos,setVideos] = useState<Video[]>([]);
+
+  const [videos,setVideos] = useState<Video[]>([]);//save videos in this component
 
 
   const loadVideos = async()=>{
     const res  = await videoService.getVideos();
-    setVideos(res.data);
+    const formatedVideos = res.data.map(video => {
+      return {
+        ...video,
+        createdAt: video.createdAt ? new Date(video.createdAt): new Date(),
+        updatedAt: video.updatedAt ? new Date(video.updatedAt): new Date(),
+      };
+      
+    }).sort((a,b) => b.createdAt.getTime() - a.createdAt.getTime());
+    setVideos(formatedVideos);
+
   }
   useEffect(()=> {
     loadVideos()
   },[])
 
   return (
-    <div>
+    <div className="row">
       {videos.map((video,index) => {
-        return <VideoItem video={video}/>
+        return <VideoItem video={video} key={video._id} loadVideos={loadVideos}/>
       })}
     </div>
   )

@@ -1,13 +1,20 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useNavigate ,useParams} from "react-router-dom";
 
 import { toast } from "react-toastify";
 import { Video } from "./IVideo";
 import * as videoService from './VideoService'
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+
+// interface Paramas {
+//   id: string;
+// }
+
 const VideoForm = () => {
   
   const history = useNavigate();//change of enrutador
+  const params = useParams();//parameter of URL
+  console.log(params)
 
   const initialState = {
     title: "",
@@ -22,14 +29,28 @@ const VideoForm = () => {
   const handleSumbit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();//cancel event by default
     console.log("video ",video);
-    const res = await videoService.createNewVideo(video);
-    toast.success("New video added");
+    //validation
+    if(!params.id){
+      const res = await videoService.createNewVideo(video);
+      toast.success("New video added");
+      
+    }else{
+      await videoService.updateVideo(params.id,video);
+    }
     history('/')
+    
     setVideo(initialState)
    // console.log("res",res)
   }
  
-
+  const getVideo = async (id: string) => {
+    const res = await videoService.getVideo(id);
+    const {title,description,url} = res.data;
+    setVideo({title,description,url})
+  }
+  useEffect(()=> {
+    if(params.id) getVideo(params.id);
+  },[]);
   return (
     <div className="row">
       <div className="col-md-4 offset-md-4">
@@ -68,7 +89,13 @@ const VideoForm = () => {
                   onChange={handleInputChange}
                 ></textarea>
               </div>
-              <button className="btn btn-primary"> Create Video</button>
+              {
+                params.id ?
+                <button className="btn btn-info"> Update Video</button>
+                :
+                <button className="btn btn-primary"> Create Video</button>
+              }
+              
             </form>
           </div>
         </div>

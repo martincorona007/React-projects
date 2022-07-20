@@ -1,6 +1,6 @@
 export interface Video {//define a data type
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
   description: string;
   title: string;
   url: string;
