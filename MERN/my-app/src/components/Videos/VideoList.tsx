@@ -12,6 +12,7 @@ const VideoList = () => {
 
   const loadVideos = async()=>{
     const res  = await videoService.getVideos();
+    console.log("VIDEOS? ",res);
     const formatedVideos = res.data.map(video => {
       return {
         ...video,

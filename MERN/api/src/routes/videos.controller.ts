@@ -3,17 +3,17 @@ import { RequestHandler } from "express"
 import Video from "./Video"//modelo
 export const createVideo: RequestHandler = async (req,res) =>{
   
-   const videoFound = await Video.findOne({url: req.body.url})//consult if the url already exits
-   if(videoFound) // yes then?
-    return res.status(301).json({message: 'The URL already exists'});
+  //  const videoFound = await Video.findOne({url: req.body.url})//consult if the url already exits
+  //  if(videoFound) // yes then?
+  //   return res.status(301).json({message: 'The URL already exists'});
 
   //res.json('creating videos')
- //  console.log("req.body = ", req.body);
+   console.log("req.body = ", req.body);
  // console.log("req.query = ", req.query);
   const video = new Video(req.body);//take data from the client
-  const savedVideo = await video.save()//save the data in the database
-  console.log("POST ",savedVideo)
-  res.json(savedVideo)//send the data to the client, to let the client know what the client has saved
+  //const savedVideo = await video.save()//save the data in the database
+  console.log("POST ",video)
+ // res.json(savedVideo)//send the data to the client, to let the client know what the client has saved
 
 } 
 export const getVideos: RequestHandler =  async(req,res) =>{
