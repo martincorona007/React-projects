@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'tachyons'
-import {robots} from './robots'
-import CardList from './CardList';
+import App from './App';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <CardList robots={robots}/>
-  
+ 
+    <App/>  
      // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
