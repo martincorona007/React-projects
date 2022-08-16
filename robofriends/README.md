@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Robofriends
 
 Tutorial for React
 To run the project:
