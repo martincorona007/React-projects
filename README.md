@@ -9,3 +9,7 @@ React projects
 
 ## robofriends
 <img src="robofriends.PNG" alt="robofriends" style="zoom: 33%;" />
+## Java-app
+<img src="Java-app.PNG" alt="robofriends" style="zoom: 33%;" />
+## student
+<img src="student.PNG" alt="robofriends" style="zoom: 33%;" />
